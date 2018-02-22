@@ -35,7 +35,7 @@ def check_output(*popenargs, **kwargs):
         if cmd is None:
             cmd = popenargs[0]
         raise subprocess.CalledProcessError(retcode, cmd)
-    return output
+    return output.decode('UTF-8')
 
 
 def run_command(command, shell=False):
@@ -150,7 +150,7 @@ def gen_xfdf(datas={}):
         </fields>
     </xfdf>""" % "\n".join(fields)
     handle, out_file = tempfile.mkstemp()
-    f = open(out_file, 'w')
+    f = open(out_file, 'wb')
     f.write(tpl.encode('UTF-8'))
     f.close()
     return out_file
